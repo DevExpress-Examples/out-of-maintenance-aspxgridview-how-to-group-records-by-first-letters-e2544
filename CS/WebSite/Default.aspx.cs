@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DevExpress.Web.ASPxGridView;
+using DevExpress.Web;
 
 public partial class _Default : System.Web.UI.Page {
     protected int GetGroupNumber(string str) {
@@ -20,7 +20,7 @@ public partial class _Default : System.Web.UI.Page {
         return -1;
     }
 
-    protected void grid_CustomColumnGroup(object sender, DevExpress.Web.ASPxGridView.CustomColumnSortEventArgs e) {
+    protected void grid_CustomColumnGroup(object sender, DevExpress.Web.CustomColumnSortEventArgs e) {
         if (e.Column.Name != "VisibleProductName") return;
 
         int res1 = GetGroupNumber(e.GetRow1Value(e.Column.FieldName).ToString());
@@ -37,7 +37,7 @@ public partial class _Default : System.Web.UI.Page {
         e.Handled = true;
     }
 
-    protected void grid_CustomGroupDisplayText(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDisplayTextEventArgs e) {
+    protected void grid_CustomGroupDisplayText(object sender, DevExpress.Web.ASPxGridViewColumnDisplayTextEventArgs e) {
         int ind = GetGroupNumber(e.Value.ToString());
         switch (ind) {
             case 1: e.DisplayText = "A-E"; break;
@@ -48,7 +48,7 @@ public partial class _Default : System.Web.UI.Page {
         }
     }
 
-    protected void grid_BeforeColumnSortingGrouping(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewBeforeColumnGroupingSortingEventArgs e) {
+    protected void grid_BeforeColumnSortingGrouping(object sender, DevExpress.Web.ASPxGridViewBeforeColumnGroupingSortingEventArgs e) {
         if (e.Column.Name == "VisibleProductName")
             grid.Columns["InvisibleProductName"].Visible = ((grid.Columns["VisibleProductName"] as GridViewDataColumn).GroupIndex != -1);
     }

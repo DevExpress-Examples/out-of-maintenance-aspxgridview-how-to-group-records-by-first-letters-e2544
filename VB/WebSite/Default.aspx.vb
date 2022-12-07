@@ -4,7 +4,7 @@ Imports System.Collections.Generic
 Imports System.Web
 Imports System.Web.UI
 Imports System.Web.UI.WebControls
-Imports DevExpress.Web.ASPxGridView
+Imports DevExpress.Web
 
 Partial Public Class _Default
 	Inherits System.Web.UI.Page
@@ -32,7 +32,7 @@ Partial Public Class _Default
 		Return -1
 	End Function
 
-	Protected Sub grid_CustomColumnGroup(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridView.CustomColumnSortEventArgs)
+	Protected Sub grid_CustomColumnGroup(ByVal sender As Object, ByVal e As DevExpress.Web.CustomColumnSortEventArgs)
 		If e.Column.Name <> "VisibleProductName" Then
 			Return
 		End If
@@ -52,7 +52,7 @@ Partial Public Class _Default
 		e.Handled = True
 	End Sub
 
-	Protected Sub grid_CustomGroupDisplayText(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridView.ASPxGridViewColumnDisplayTextEventArgs)
+	Protected Sub grid_CustomGroupDisplayText(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewColumnDisplayTextEventArgs)
 		Dim ind As Integer = GetGroupNumber(e.Value.ToString())
 		Select Case ind
 			Case 1
@@ -68,7 +68,7 @@ Partial Public Class _Default
 		End Select
 	End Sub
 
-	Protected Sub grid_BeforeColumnSortingGrouping(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridView.ASPxGridViewBeforeColumnGroupingSortingEventArgs)
+	Protected Sub grid_BeforeColumnSortingGrouping(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewBeforeColumnGroupingSortingEventArgs)
 		If e.Column.Name = "VisibleProductName" Then
 			grid.Columns("InvisibleProductName").Visible = ((TryCast(grid.Columns("VisibleProductName"), GridViewDataColumn)).GroupIndex <> -1)
 		End If
